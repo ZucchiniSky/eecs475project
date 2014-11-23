@@ -40,16 +40,18 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (*this != a && x != a.x)
     {
         // case one
-
+        Zp delta = (a.y-y)/(a.x-x);
+        Zp xR = (delta * delta) - x - a.x;
     } else if (*this == a && 2*y != 0)
     {
         // case two
-
+        Zp delta = (3 * x * x + A)/(2 * y);
+        Zp xR = (delta * delta) + 2 * x;
     } else {
         // case three (identity element)
         return ECpoint(true);
     }
-    return *this;
+    return ECpoint(xR, -y + delta * (x - xR));
 }
 
 
@@ -70,6 +72,16 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
 	//Find the sum of val*val+...+val (pow times)
+    if (pow == 0)
+    {
+        return Zp(1);
+    }
+    while (pow > 1)
+    {
+        val += val;
+        pow--;
+    }
+    return val;
 }
 
 
@@ -96,17 +108,35 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
+    Zp x = compressedPoint/2;
+    bool modbit = (compressedPoint % 2 == 0);
+    Zp posY = x * x;
+    Zp negY = -x * x;
+    Zp y = 0;
+    if ((posY % 2 == 0) && modbit)
+    {
+        y = posY;
+    } else
+    {
+        y = negY;
+    }
+    return ECpoint(x, y);
 }
 
 
 pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privateKey,mpz_class plaintext){
 	// You must implement elliptic curve encryption
 	//  Do not generate a random key. Use the private key that is passed from the main function
+    ECpoint Q = privateKey * G;
+    ECpoint R = privateKey * publicKey;
+    return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
 
 
 mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 	// Implement EC Decryption
+    ECpoint R = privateKey * pointDecompress(ciphertext.first);
+    return ciphertext.second ^ pointDecompress(R);
 }
 
 
