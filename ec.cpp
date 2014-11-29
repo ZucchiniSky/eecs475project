@@ -53,7 +53,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         // case three (identity element)
         return ECpoint(true);
     }
-    return ECpoint(xR, -y + delta * (x - xR));
+    return ECpoint(xR, delta * (x - xR) - y);
 }
 
 
