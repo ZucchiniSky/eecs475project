@@ -120,7 +120,7 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     Zp posY = x * x;
     Zp negY = identity - x * x;
     Zp y = 0;
-    if ((posY % 2 == 0) && modbit)
+    if ((posY.getValue() % 2 == 0) && modbit)
     {
         y = posY;
     } else
