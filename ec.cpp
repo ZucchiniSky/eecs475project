@@ -115,9 +115,10 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
     Zp x(compressedPoint/2);
+    Zp identity(0);
     bool modbit = (compressedPoint % 2 == 0);
     Zp posY = x * x;
-    Zp negY = -1 * x * x;
+    Zp negY = identity - x * x;
     Zp y = 0;
     if ((posY % 2 == 0) && modbit)
     {
