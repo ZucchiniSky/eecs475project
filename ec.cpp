@@ -23,14 +23,15 @@ Zp Zp::inverse() const{
     mpz_class old_r = PRIME;
     mpz_class quotient = 0;
     //cout << "starting\n";
-    while (r!=0)
+    while (r != 0)
     {
         quotient = old_r / r;
         parallel_assign(old_r, r, quotient);
         parallel_assign(old_s, s, quotient);
         parallel_assign(old_t, t, quotient);
     }
-    return old_s;
+    Zp inverse(old_s);
+    return inverse;
     // this might be old_t instead...
 }
 
@@ -40,12 +41,12 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (!(*this == a) && !(x == a.x))
     {
         // case one
-        Zp delta((a.y-y)/(a.x-x));
+        Zp delta((a.y-y)*(a.x-x).inverse());
         Zp xR = (delta * delta) - x - a.x;
-    } else if ((*this == a) && 2*y != 0)
+    } else if ((*this == a) && !(2*y == 0))
     {
         // case two
-        Zp delta((3 * x * x + A)/(2 * y));
+        Zp delta((3 * x * x + A)*(2 * y).inverse());
         Zp xR = (delta * delta) + 2 * x;
     } else {
         // case three (identity element)
@@ -108,7 +109,7 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
-    Zp x = compressedPoint/2;
+    Zp x(compressedPoint/2);
     bool modbit = (compressedPoint % 2 == 0);
     Zp posY = x * x;
     Zp negY = -x * x;
