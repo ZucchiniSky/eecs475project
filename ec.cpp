@@ -39,16 +39,17 @@ Zp Zp::inverse() const{
 ECpoint ECpoint::operator + (const ECpoint &a) const {
 	// Implement  elliptic curve addition
     Zp two(2), three(3);
+    Zp xR, delta;
     if (!(*this == a) && !(x == a.x))
     {
         // case one
         Zp delta((a.y-y)*(a.x-x).inverse());
-        Zp xR = (delta * delta) - x - a.x;
+        xR = (delta * delta) - x - a.x;
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
         Zp delta((three * x * x + A)*(two * y).inverse());
-        Zp xR = (delta * delta) + two * x;
+        xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
         return ECpoint(true);
@@ -64,12 +65,14 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
+    ECpoint newP(p.x, p.y);
+    newP.infinityPoint = p.infinityPoint;
     while (v > 1)
     {
-        p += p;
+        newP = newP + p;
         v--;
     }
-    return p;
+    return newP;
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
@@ -78,9 +81,10 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
+    Zp newVal(val.getValue());
     while (pow > 1)
     {
-        val += val;
+    	newVal = newVal * val;
         pow--;
     }
     return val;
@@ -113,7 +117,7 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     Zp x(compressedPoint/2);
     bool modbit = (compressedPoint % 2 == 0);
     Zp posY = x * x;
-    Zp negY = -x * x;
+    Zp negY = -1 * x * x;
     Zp y = 0;
     if ((posY % 2 == 0) && modbit)
     {
