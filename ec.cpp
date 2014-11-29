@@ -38,16 +38,17 @@ Zp Zp::inverse() const{
 
 ECpoint ECpoint::operator + (const ECpoint &a) const {
 	// Implement  elliptic curve addition
+    Zp two(2), three(3);
     if (!(*this == a) && !(x == a.x))
     {
         // case one
         Zp delta((a.y-y)*(a.x-x).inverse());
         Zp xR = (delta * delta) - x - a.x;
-    } else if ((*this == a) && !(y + y == 0))
+    } else if ((*this == a) && !(two * y == 0))
     {
         // case two
-        Zp delta((3 * x * x + A)*(y + y).inverse());
-        Zp xR = (delta * delta) + 2 * x;
+        Zp delta((three * x * x + A)*(two * y).inverse());
+        Zp xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
         return ECpoint(true);
