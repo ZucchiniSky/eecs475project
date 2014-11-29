@@ -22,8 +22,8 @@ Zp Zp::inverse() const{
     mpz_class old_t = 0;
     mpz_class old_r = PRIME;
     mpz_class quotient = 0;
-    cout << "starting\n";
-    while (r)
+    //cout << "starting\n";
+    while (r!=0)
     {
         quotient = old_r / r;
         parallel_assign(old_r, r, quotient);
