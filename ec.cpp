@@ -135,7 +135,7 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 	// You must implement elliptic curve encryption
 	//  Do not generate a random key. Use the private key that is passed from the main function
     ECpoint Q = G * privateKey;
-    ECpoint R = privateKey * publicKey;
+    ECpoint R = publicKey * privateKey;
     return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
 
