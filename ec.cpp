@@ -17,24 +17,34 @@ Zp Zp::inverse() const{
 	// Implement the Extended Euclidean Algorithm to return the inverse mod PRIME
     mpz_class s = 0;
     mpz_class t = 1;
-    mpz_class r = value;
+    if(value >  PRIME)
+    {
+    	mpz_class r = value;
+    	mpz_class old_r = PRIME;
+    }
+    else
+    {
+   	mpz_class r = PRIME;
+    	mpz_class old_r = value;
+    }
+    mpz_class r = PRIME;
     mpz_class old_s = 1;
     mpz_class old_t = 0;
-    mpz_class old_r = PRIME;
+    
     mpz_class quotient = 0;
     cout << "starting\n";
     while (r != 0)
     {
         quotient = old_r / r;
-        //parallel_assign(old_r, r, quotient);
+        parallel_assign(old_r, r, quotient);
         cout << "old_r: " << old_r << " " << "r: " << r << "\n";
-        //parallel_assign(old_s, s, quotient);
+        parallel_assign(old_s, s, quotient);
         cout << "old_s: " << old_s << " " << "s: "<<s  << "\n";
-        //parallel_assign(old_t, t, quotient);
+        parallel_assign(old_t, t, quotient);
         cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
-        break;
+        //break;
     }
-    exit(1);
+    //exit(1);
     Zp inverse(old_s);
     return inverse;
     // this might be old_t instead...
