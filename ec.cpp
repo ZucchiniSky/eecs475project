@@ -32,6 +32,7 @@ Zp Zp::inverse() const{
         cout << old_r << " " << s << ""  << quotient << "\n";
         parallel_assign(old_t, t, quotient);
         cout << old_r << " " << t << ""  << quotient << "\n";
+        break;
     }
     Zp inverse(old_s);
     return inverse;
