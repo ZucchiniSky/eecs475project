@@ -24,7 +24,6 @@ Zp Zp::inverse() const{
    	r = PRIME;
     	old_r = value;
     }
-    mpz_class r = PRIME;
     mpz_class old_s = 1;
     mpz_class old_t = 0;
     
