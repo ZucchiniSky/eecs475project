@@ -17,15 +17,12 @@ Zp Zp::inverse() const{
 	// Implement the Extended Euclidean Algorithm to return the inverse mod PRIME
     mpz_class s = 0;
     mpz_class t = 1;
-    if(value >  PRIME)
-    {
-    	mpz_class r = value;
+     	mpz_class r = value;
     	mpz_class old_r = PRIME;
-    }
-    else
+    if(value <  PRIME)
     {
-   	mpz_class r = PRIME;
-    	mpz_class old_r = value;
+   	r = PRIME;
+    	old_r = value;
     }
     mpz_class r = PRIME;
     mpz_class old_s = 1;
