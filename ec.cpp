@@ -19,11 +19,6 @@ Zp Zp::inverse() const{
     mpz_class t = 1;
      	mpz_class r = value;
     	mpz_class old_r = PRIME;
-    if(value <  PRIME)
-    {
-   	r = PRIME;
-    	old_r = value;
-    }
     mpz_class old_s = 1;
     mpz_class old_t = 0;
     
