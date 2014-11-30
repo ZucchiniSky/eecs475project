@@ -91,7 +91,8 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     	newVal = newVal * val;
         pow--;
     }
-    return val;
+    return newVal; //originally said val
+	
 }
 
 
