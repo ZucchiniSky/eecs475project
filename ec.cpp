@@ -22,7 +22,7 @@ Zp Zp::inverse() const{
     mpz_class old_t = 0;
     mpz_class old_r = PRIME;
     mpz_class quotient = 0;
-    //cout << "starting\n";
+    cout << "starting\n";
     while (r != 0)
     {
         quotient = old_r / r;
