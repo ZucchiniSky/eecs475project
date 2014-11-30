@@ -69,7 +69,7 @@ pair <ECpoint, mpz_class> ECsystem::generateKeys(){
 	//Generate the private key and public key for the user to whom message is sent
 	//Returns only the "P" value of public key and "a" value of private key, 
 	//as other parameters are globally defined
-	
+	cout << "YO";
 	privateKey = XA;
 	publicKey = G*privateKey; 
 	return pair <ECpoint, mpz_class> (publicKey, privateKey);
