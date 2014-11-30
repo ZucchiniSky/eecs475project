@@ -5,6 +5,7 @@
 #include <utility>
 #include "ec_ops.h"
 using namespace std;
+void parallel_assign(mpz_class &a, mpz_class &b, mpz_class quotient);
 
 void parallel_assign(mpz_class &a, mpz_class &b, mpz_class quotient)
 {
