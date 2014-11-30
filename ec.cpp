@@ -24,7 +24,7 @@ Zp Zp::inverse() const{
     mpz_class old_t = 0;
     
     mpz_class quotient = 0;
-    //cout << "starting\n";
+    cout << "starting\n";
     while (r != 0)
     {
         quotient = old_r / r;
@@ -35,7 +35,7 @@ Zp Zp::inverse() const{
         parallel_assign(old_t, t, quotient);
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
-   // cout << "done\n";
+    cout << "done\n";
     Zp inv(old_s);
     return inv;
     // this might be old_t instead...
