@@ -167,11 +167,12 @@ mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 int main(void){
 	srand(time(0));
 	cout << "Hi";
-	/*
+	
 	ECsystem ec;
 	mpz_class incrementVal;	
-	pair <ECpoint, mpz_class> keys = ec.generateKeys();
 	
+	pair <ECpoint, mpz_class> keys = ec.generateKeys();
+	/*
 	
 	mpz_class plaintext = MESSAGE;
 	ECpoint publicKey = keys.first;
