@@ -169,8 +169,8 @@ int main(void){
 	ECsystem ec;
 	mpz_class incrementVal;	
 	pair <ECpoint, mpz_class> keys = ec.generateKeys();
-	
-	
+	cout << "Hi";
+	/*
 	mpz_class plaintext = MESSAGE;
 	ECpoint publicKey = keys.first;
 	cout<<"Public key is: "<<publicKey<<"\n";
@@ -191,7 +191,7 @@ int main(void){
 		cout << "Correct!" << endl;
 	else
 		cout << "Plaintext different from original plaintext." << endl;	
-			
+		*/	
 	return 1;
 
 }
