@@ -34,6 +34,7 @@ Zp Zp::inverse() const{
         cout << old_r << " " << t << ""  << quotient << "\n";
         break;
     }
+    exit(1);
     Zp inverse(old_s);
     return inverse;
     // this might be old_t instead...
