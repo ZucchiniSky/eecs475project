@@ -35,8 +35,8 @@ Zp Zp::inverse() const{
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
    // cout << "done\n";
-    Zp inverse(old_s);
-    return inverse;
+    Zp inv(old_s);
+    return inv;
     // this might be old_t instead...
 }
 
