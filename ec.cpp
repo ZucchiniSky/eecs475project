@@ -85,7 +85,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     cout << "first while" << endl;
     val = val / 2;
     cout << "val / 2" << endl;
-    for (; val >= 0; val = val / 2)
+    for (; val > 0; val = val / 2)
     {
     	cout << "in loop" << endl;
     	Q = Q + Q;
