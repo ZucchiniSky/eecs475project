@@ -24,7 +24,7 @@ Zp Zp::inverse() const{
     mpz_class old_t = 0;
     
     mpz_class quotient = 0;
-    //cout << "starting\n";
+    cout << "starting\n";
     while (r != 0)
     {
         quotient = old_r / r;
@@ -35,7 +35,7 @@ Zp Zp::inverse() const{
         parallel_assign(old_t, t, quotient);
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
-    //cout << "done\n";
+    cout << "done\n";
     Zp inv(old_s);
     return inv;
     // this might be old_t instead...
@@ -49,12 +49,12 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (!(*this == a) && !(x == a.x))
     {
         // case one
-        Zp delta((a.y-y)*(a.x-x).inverse());
+        Zp delta((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
         xR = (delta * delta) - x - a.x;
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
-        Zp delta((three * x * x + A)*(two * y).inverse());
+        Zp delta((three.getValue() * x.getValue() * x.getValue() + A.getValue())/(two.getValue() * y.getValue()));
         xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
@@ -171,13 +171,12 @@ int main(void){
 	
 	ECsystem ec;
 	mpz_class incrementVal;	
-	/*
 	pair <ECpoint, mpz_class> keys = ec.generateKeys();
 	
 	mpz_class plaintext = MESSAGE;
 	ECpoint publicKey = keys.first;
 	cout<<"Public key is: "<<publicKey<<"\n";
-	*/
+	
 	cout<<"Enter offset value for sender's private key"<<endl;
 	cin>>incrementVal;
 	mpz_class privateKey = XB + incrementVal;
