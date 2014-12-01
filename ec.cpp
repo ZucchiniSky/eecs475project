@@ -67,6 +67,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 	//Find the sum of p+p+...+p (vtimes)
+	cout << "repeatsum with v = " << v << endl;
     if (v == 0)
     {
         // this is p^0, which is the identity
@@ -76,10 +77,11 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     multP.infinityPoint = p.infinityPoint;
     while (v > 1)
     {
-        p = multP + p;
+        multP = multP + p;
         v = v - 1;
+        cout << "v = " << v << endl;
     }
-    return p;
+    return multP;
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
@@ -91,10 +93,10 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     Zp newVal(val.getValue());
     while (pow > 1)
     {
-    	val = newVal * val;
+    	newVal = newVal * val;
         pow = pow - 1;
     }
-    return val;
+    return newVal;
 }
 
 
