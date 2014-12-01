@@ -179,6 +179,9 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     } else if (quadRes2.getValue() % 2 == modbit)
     {
         y = quadRes2;
+    } else
+    {
+        cout << "point decompression error...neither satisfy modbit!" << endl;
     }
     return ECpoint(x, y);
 }
