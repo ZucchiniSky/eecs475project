@@ -85,7 +85,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     	Q = Q + Q;
     	if ((v % val) == 1)
     	{
-    		Q = Q + P;
+    		Q = Q + p;
     	}
     }
     return Q;
