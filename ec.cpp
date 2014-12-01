@@ -18,8 +18,10 @@ Zp Zp::inverse() const{
 	// Implement the Extended Euclidean Algorithm to return the inverse mod PRIME
     mpz_class s = 0;
     mpz_class t = 1;
+    
      	mpz_class r = value;
     	mpz_class old_r = PRIME;
+    
     mpz_class old_s = 1;
     mpz_class old_t = 0;
     
@@ -60,17 +62,17 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (!(*this == a) && !(x == a.x))
     {
         // case one
-        delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
-        xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
-        //delta = (a.y-y)*(a.x-x).inverse();
-        //xR = (delta * delta) - x - a.x;
+        //delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
+        //xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
+        delta = (a.y-y)/(a.x-x);//.inverse();
+        xR = (delta * delta) - x - a.x;
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
-        delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
-        xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
-        //delta = (three * x * x + A) * (two * y).inverse();
-        //xR = (delta * delta) + two * x;
+        //delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
+        //xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
+        delta = (three * x * x + A) / (two * y);
+        xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
         return ECpoint(true);
