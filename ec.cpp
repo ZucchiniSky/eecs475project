@@ -64,15 +64,19 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         // case one
         //delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
         //xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
-        delta = (a.y-y)/(a.x-x);//.inverse();
-        xR = (delta * delta) - x - a.x;
+        //delta = (a.y-y) * (a.x-x).inverse();
+        //xR = (delta * delta) - x - a.x;
+        delta.setValue((a.y.getValue()-y.getValue())*(a.x.getValue()-x.getValue()).inverse());
+        xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
         //delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
         //xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
-        delta = (three * x * x + A) / (two * y);
-        xR = (delta * delta) + two * x;
+        //delta = (three * x * x + A) * (two * y).inverse();
+        //xR = (delta * delta) + two * x;
+        delta.setValue((three.getValue() * x.getValue() * x.getValue() + A) * (two.getValue() * y.getValue()).inverse());
+        xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
     } else {
         // case three (identity element)
         return ECpoint(true);
