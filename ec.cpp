@@ -42,7 +42,8 @@ Zp Zp::inverse() const{
         parallel_assign(old_t, t, quotient);
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
-    Zp inv(old_s);
+    //Zp inv(old_s);
+    Zp inv(-1);
     //cout << "inverse results: " << endl;
     //cout << old_s << " " << value * old_s << endl;
     return inv;
