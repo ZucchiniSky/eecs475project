@@ -54,7 +54,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
-        Zp delta((three.getValue() * x.getValue() * x.getValue() + A.getValue())/(two.getValue() * y.getValue()));
+        Zp delta((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
         xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
