@@ -53,7 +53,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     	return ECpoint(x, y);
     }
     Zp two(2), three(3);
-    Zp xR, delta;
+    Zp xR, yR, delta;
     if (!(*this == a) && !(x == a.x))
     {
         // case one
@@ -68,7 +68,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         // case three (identity element)
         return ECpoint(true);
     }
-    Zp yR(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
+    yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
     return ECpoint(xR, yR);
 }
 
@@ -170,9 +170,7 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 	// You must implement elliptic curve encryption
 	//  Do not generate a random key. Use the private key that is passed from the main function
     ECpoint Q = G * privateKey;
-    cout << "printing Q in encrypt\n" << Q.x.getValue() << "\n" << Q.y.getValue() << "\n" << Q.infinityPoint << endl;
     ECpoint R = publicKey * privateKey;
-    cout << "printing R in encrypt\n" << R.x.getValue() << "\n" << R.y.getValue() << "\n" << R.infinityPoint << endl;
     return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
 
