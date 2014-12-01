@@ -61,7 +61,9 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         return ECpoint(true);
     }
     Zp yR(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
-    return ECpoint(xR, yR);
+    x = xR;
+    y = yR;
+    return *this;
 }
 
 
@@ -72,14 +74,14 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECpoint newP(p.x, p.y);
-    newP.infinityPoint = p.infinityPoint;
+    ECpoint multP(p.x, p.y);
+    multP.infinityPoint = p.infinityPoint;
     while (v > 1)
     {
-        newP = newP + p;
+        p = multP + p;
         v = v - 1;
     }
-    return newP;
+    return p;
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
@@ -91,10 +93,10 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     Zp newVal(val.getValue());
     while (pow > 1)
     {
-    	newVal = newVal * val;
+    	val = newVal * val;
         pow = pow - 1;
     }
-    return newVal;
+    return val;
 }
 
 
