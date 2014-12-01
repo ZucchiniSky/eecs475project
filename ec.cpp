@@ -44,6 +44,14 @@ Zp Zp::inverse() const{
 
 ECpoint ECpoint::operator + (const ECpoint &a) const {
 	// Implement  elliptic curve addition
+    if (infinityPoint)
+    {
+    	return ECpoint(a.x, a.y);
+    }
+    if (a.infinityPoint)
+    {
+    	return ECpoint(x, y);
+    }
     Zp two(2), three(3);
     Zp xR, delta;
     if (!(*this == a) && !(x == a.x))
