@@ -24,7 +24,6 @@ Zp Zp::inverse() const{
     mpz_class old_t = 0;
     
     mpz_class quotient = 0;
-    cout << "starting\n";
     while (r != 0)
     {
         quotient = old_r / r;
@@ -35,7 +34,6 @@ Zp Zp::inverse() const{
         parallel_assign(old_t, t, quotient);
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
-    cout << "done\n";
     Zp inv(old_s);
     return inv;
     // this might be old_t instead...
@@ -61,18 +59,23 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (!(*this == a) && !(x == a.x))
     {
         // case one
-        delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
-        xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
+        //delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
+        //xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
+        delta = (a.y-y)*(a.x-x).inverse();
+        xR = (delta * delta) - x - a.x;
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
-        delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
-        xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
+        //delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
+        //xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
+        delta = (three * x * x + A) * (two * y).inverse();
+        xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
         return ECpoint(true);
     }
-    yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
+    //yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
+    yR = delta * (x - xR) - y;
     return ECpoint(xR, yR);
 }
 
@@ -99,7 +102,6 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     		Q = Q + p;
     	}
     }
-    cout << "printing Q\n" << Q.x.getValue() << "\n" << Q.y.getValue() << "\n" << Q.infinityPoint << endl;
     return Q;
 }
 
@@ -199,12 +201,6 @@ mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 
 int main(void){
 	srand(time(0));
-	
-	cout << "testing (0,0) + (0,0)" << endl;
-	Zp zero(0);
-	ECpoint one(zero,zero), two(zero,zero);
-	
-	cout << "returned: " << (one + two) << endl;
 	
 	ECsystem ec;
 	mpz_class incrementVal;	
