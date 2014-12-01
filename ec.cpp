@@ -171,18 +171,17 @@ int main(void){
 	
 	ECsystem ec;
 	mpz_class incrementVal;	
-	
-	pair <ECpoint, mpz_class> keys = ec.generateKeys();
 	/*
+	pair <ECpoint, mpz_class> keys = ec.generateKeys();
 	
 	mpz_class plaintext = MESSAGE;
 	ECpoint publicKey = keys.first;
 	cout<<"Public key is: "<<publicKey<<"\n";
-	
+	*/
 	cout<<"Enter offset value for sender's private key"<<endl;
 	cin>>incrementVal;
 	mpz_class privateKey = XB + incrementVal;
-	
+	/*
 	pair<mpz_class, mpz_class> ciphertext = ec.encrypt(publicKey, privateKey, plaintext);	
 	cout<<"Encrypted ciphertext is: ("<<ciphertext.first<<", "<<ciphertext.second<<")\n";
 	mpz_class plaintext1 = ec.decrypt(ciphertext);
