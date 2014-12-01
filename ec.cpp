@@ -46,6 +46,10 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 	// Implement  elliptic curve addition
     if (infinityPoint)
     {
+    	if (a.infinityPoint)
+    	{
+    		return ECpoint(true);
+    	}
     	return ECpoint(a.x, a.y);
     }
     if (a.infinityPoint)
@@ -80,7 +84,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECpoint Q(0,0);
+    ECpoint Q(true);
     mpz_class val(1);
     while (val <= v)
     {
