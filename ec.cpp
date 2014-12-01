@@ -96,22 +96,24 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    Zp Q(0);
-    mpz_class val(1);
-    while (val <= v)
+    mpz_class Q(0);
+    mpz_class mod(1);
+    while (mod <= pow)
     {
-    	val = val * 2;
+    	mod = mod * 2;
     }
-    val = val / 2;
-    for (; val > 0; val = val / 2)
+    mod = mod / 2;
+    mpz_class value = val.getValue();
+    for (; mod > 0; mod = mod / 2)
     {
     	Q = 2 * Q;
-    	if ((v % val) == 1)
+    	if ((value % mod) == 1)
     	{
-    		Q = Q * p;
+    		Q = Q * value;
     	}
     }
-    return Q;
+    Zp ans(Q);
+    return ans;
 }
 
 
