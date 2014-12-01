@@ -73,15 +73,22 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECpoint multP(p.x, p.y);
-    multP.infinityPoint = p.infinityPoint;
-    while (v > 1)
+    ECpoint Q(0,0);
+    mpz_class val(1);
+    while (val <= v)
     {
-        multP = multP + p;
-        v = v - 1;
-        cout << "v = " << v << endl;
+    	val = val * 2;
     }
-    return multP;
+    val = val / 2;
+    for (; val >= 0; val = val / 2)
+    {
+    	Q = Q + Q;
+    	if ((v % val) == 1)
+    	{
+    		Q = Q + P;
+    	}
+    }
+    return Q;
 }
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
