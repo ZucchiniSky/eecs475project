@@ -167,16 +167,18 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
     Zp x(compressedPoint/2);
     Zp identity(0);
-    bool modbit = (compressedPoint % 2 == 0);
-    Zp posY = x * x;
-    Zp negY = identity - x * x;
+    mpz_class modbit = compressedPoint % 2;
+    Zp z;
+    z.setValue((x * x * x).getValue() + A * x.getValue() + B);
     Zp y = 0;
-    if ((posY.getValue() % 2 == 0) && modbit)
+    Zp quadRes1 = power(z, (PRIME + 1) / 4);
+    Zp quadRes2 = identity - quadRes1;
+    if (quadRes1.getValue() % 2 == modbit)
     {
-        y = posY;
-    } else
+        y = quadRes1;
+    } else if (quadRes2.getValue() % 2 == modbit)
     {
-        y = negY;
+        y = quadRes2;
     }
     return ECpoint(x, y);
 }
