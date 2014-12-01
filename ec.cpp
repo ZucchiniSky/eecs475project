@@ -73,13 +73,18 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
+    cout << "v != 0" << endl;
     ECpoint Q(0,0);
+    cout << "created point" << endl;
     mpz_class val(1);
+    cout << "initiated val" << endl;
     while (val <= v)
     {
     	val = val * 2;
     }
+    cout << "first while" << endl;
     val = val / 2;
+    cout << "val / 2" << endl;
     for (; val >= 0; val = val / 2)
     {
     	Q = Q + Q;
