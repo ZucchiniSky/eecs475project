@@ -43,7 +43,7 @@ Zp Zp::inverse() const{
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
     //Zp inv(old_s);
-    Zp inv(-1);
+    Zp inv(5);
     //cout << "inverse results: " << endl;
     //cout << old_s << " " << value * old_s << endl;
     return inv;
