@@ -49,13 +49,13 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (!(*this == a) && !(x == a.x))
     {
         // case one
-        delta((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
-        xR((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
+        delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
+        xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
-        delta((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
-        xR((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
+        delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
+        xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
     } else {
         // case three (identity element)
         return ECpoint(true);
