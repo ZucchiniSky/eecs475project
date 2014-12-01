@@ -87,7 +87,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     		Q = Q + p;
     	}
     }
-    cout << "printing Q\n" << Q.x.getValue() << "\n" << Q.y.getValue() << "\n" << Q.infinityPoint() << endl;
+    cout << "printing Q\n" << Q.x.getValue() << "\n" << Q.y.getValue() << "\n" << Q.infinityPoint << endl;
     return Q;
 }
 
