@@ -132,7 +132,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     mpz_class value = val.getValue();
     for (; mod > 0; mod = mod / 2)
     {
-    	Q = 2 * Q;
+    	Q = Q * Q;
     	if ((value % mod) == 1)
     	{
     		Q = Q * value;
@@ -168,7 +168,7 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
     Zp x;
-    x.setValue(compressedPoint/2);
+    x.setValue(compressedPoint >> 2);
     Zp identity(0);
     mpz_class modbit = compressedPoint % 2;
     Zp z;
