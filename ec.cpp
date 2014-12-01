@@ -50,17 +50,18 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     {
         // case one
         Zp delta((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
-        xR = (delta * delta) - x - a.x;
+        xR((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
     } else if ((*this == a) && !(two * y == 0))
     {
         // case two
         Zp delta((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
-        xR = (delta * delta) + two * x;
+        xR((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
     } else {
         // case three (identity element)
         return ECpoint(true);
     }
-    return ECpoint(xR, delta * (x - xR) - y);
+    Zp yR(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
+    return ECpoint(xR, yR);
 }
 
 
