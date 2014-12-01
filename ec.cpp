@@ -196,6 +196,12 @@ mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 int main(void){
 	srand(time(0));
 	
+	cout << "testing (0,0) + (0,0)" << endl;
+	Zp zero(0);
+	ECpoint one(zero,zero), two(zero,zero);
+	
+	cout << "returned: " << (one + two) << endl;
+	
 	ECsystem ec;
 	mpz_class incrementVal;	
 	pair <ECpoint, mpz_class> keys = ec.generateKeys();
