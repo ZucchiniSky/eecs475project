@@ -36,11 +36,11 @@ Zp Zp::inverse() const{
     {
         quotient = old_r / r;
         parallel_assign(old_r, r, quotient);
-        cout << "old_r: " << old_r << " " << "r: " << r << "\n";
+        //cout << "old_r: " << old_r << " " << "r: " << r << "\n";
         parallel_assign(old_s, s, quotient);
-        cout << "old_s: " << old_s << " " << "s: "<<s  << "\n";
+        //cout << "old_s: " << old_s << " " << "s: "<<s  << "\n";
         parallel_assign(old_t, t, quotient);
-        cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
+        //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
     Zp inv(old_s);
     cout << "inverse results: " << endl;
@@ -85,6 +85,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     }
     //yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
     yR = delta * (x - xR) - y;
+    cout << "YR" << yR << endl;
     return ECpoint(xR, yR);
 }
 
