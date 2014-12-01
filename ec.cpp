@@ -61,9 +61,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         return ECpoint(true);
     }
     Zp yR(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
-    x = xR;
-    y = yR;
-    return *this;
+    return ECpoint(xR, yR);
 }
 
 
