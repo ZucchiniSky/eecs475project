@@ -67,34 +67,24 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 	//Find the sum of p+p+...+p (vtimes)
-	cout << "repeatsum with v = " << v << endl;
     if (v == 0)
     {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    cout << "v != 0" << endl;
     ECpoint Q(0,0);
-    cout << "created point" << endl;
     mpz_class val(1);
-    cout << "initiated val" << endl;
     while (val <= v)
     {
     	val = val * 2;
     }
-    cout << "first while" << endl;
     val = val / 2;
-    cout << "val / 2" << endl;
     for (; val > 0; val = val / 2)
     {
-    	cout << "in loop" << endl;
     	Q = Q + Q;
-    	cout << "added Q" << endl;
     	if ((v % val) == 1)
     	{
-    		cout << "in if" << endl;
     		Q = Q + p;
-    		cout << "added P" << endl;
     	}
     }
     return Q;
@@ -106,13 +96,22 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    Zp newVal(val.getValue());
-    while (pow > 1)
+    Zp Q(0);
+    mpz_class val(1);
+    while (val <= v)
     {
-    	newVal = newVal * val;
-        pow = pow - 1;
+    	val = val * 2;
     }
-    return newVal;
+    val = val / 2;
+    for (; val > 0; val = val / 2)
+    {
+    	Q = 2 * Q;
+    	if ((v % val) == 1)
+    	{
+    		Q = Q * p;
+    	}
+    }
+    return Q;
 }
 
 
