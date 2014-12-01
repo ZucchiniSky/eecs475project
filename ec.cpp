@@ -77,7 +77,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     while (v > 1)
     {
         newP = newP + p;
-        v--;
+        v = v - 1;
     }
     return newP;
 }
@@ -92,10 +92,9 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     while (pow > 1)
     {
     	newVal = newVal * val;
-        pow--;
+        pow = pow - 1;
     }
-    return newVal; //originally said val
-	
+    return newVal;
 }
 
 
