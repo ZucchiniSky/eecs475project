@@ -42,9 +42,10 @@ Zp Zp::inverse() const{
         parallel_assign(old_t, t, quotient);
         //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
-    Zp inv(old_s);
     //cout << "inverse results: " << endl;
     //cout << old_s << " " << value * old_s << endl;
+    Zp inv;
+    inv.setValue(old_s);
     return inv;
 }
 
@@ -137,7 +138,8 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     		Q = Q * value;
     	}
     }
-    Zp ans(Q);
+    Zp ans;
+    ans.setValue(Q);
     return ans;
 }
 
@@ -165,7 +167,8 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
-    Zp x(compressedPoint/2);
+    Zp x;
+    x.setValue(compressedPoint/2);
     Zp identity(0);
     mpz_class modbit = compressedPoint % 2;
     Zp z;
