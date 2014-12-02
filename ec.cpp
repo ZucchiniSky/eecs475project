@@ -154,9 +154,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
             Q = Q * val;
         }
     }
-    Zp ans;
-    ans.setValue(Q);
-    return ans;
+    return Q;
 }
 
 
