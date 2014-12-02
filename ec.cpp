@@ -86,7 +86,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         cout << "identity element" << endl;
         return ECpoint(true);
     }
-    mpz_class finalY = delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue();
+    mpz_class finalY = delta.getValue() * ((x.getValue() - xR.getValue()) % PRIME) - y.getValue();
     while (finalY < 0)
     {
         finalY = finalY + PRIME;
