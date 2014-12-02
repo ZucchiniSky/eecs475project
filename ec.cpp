@@ -87,7 +87,6 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     }
     //yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
     yR = delta * (x - xR) - y;
-    cout << "YR" << yR << endl;
     return ECpoint(xR, yR);
 }
 
