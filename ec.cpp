@@ -186,6 +186,10 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     cout << "modbit is " << modbit << endl;
     Zp z;
     z.setValue((x * x * x).getValue() + A * x.getValue() + B);
+    if (z.getValue() < 0)
+    {
+        z.setValue(z.getValue() + PRIME);
+    }
     cout << "z is " << z.getValue() << endl;
     Zp y = 0;
     Zp quadRes1 = power(z, (PRIME + 1) / 4);
@@ -216,6 +220,10 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
     cout << "Q: " << Q << endl;
     Zp z;
     z.setValue((Q.x * Q.x * Q.x).getValue() + A * Q.x.getValue() + B);
+    if (z.getValue() < 0)
+    {
+        z.setValue(z.getValue() + PRIME);
+    }
     cout << "Q.z is " << z.getValue() << endl;
     cout << "Q.y^2 is " << (Q.y * Q.y).getValue() << endl;
     cout << "R: " << R << endl;
