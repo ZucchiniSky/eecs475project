@@ -129,6 +129,12 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     mpz_class value = val.getValue();
     mpz_class zero(0);
     mpz_class mod(1);
+    mpz_class bits(0);
+    while (mod <= pow)
+    {
+        mod = mod * 2;
+        bits = bits + 1;
+    }
     mpz_class shrinker = pow;
     vector<mpz_class> bitrep;
     for (int i = 0; i < bits; i++)
