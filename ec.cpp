@@ -253,7 +253,7 @@ int main(void){
 	cin>>incrementVal;
 	mpz_class privateKey = XB + incrementVal;
 	pair<mpz_class, mpz_class> ciphertext = ec.encrypt(publicKey, privateKey, plaintext);	
-	cout<<"Encrypted ciphertext is: ("<<ciphertext.first<<", "<<ciphertext.second<<")\n";
+	cout<<"Encrypted ciphertext is: ("<<ciphertext.first<<", "<<ciphertext.second<<")" << endl;
 	mpz_class plaintext1 = ec.decrypt(ciphertext);
 	
 	cout << "Original plaintext is: " << plaintext << endl;
