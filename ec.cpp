@@ -137,12 +137,12 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     }
     mpz_class shrinker = pow;
     vector<mpz_class> bitrep;
-    for (int i = 0; i < bits; i++)
+    for (mpz_class i = 0; i < bits; i = i + 1)
     {
         bitrep.push_back(shrinker % 2);
         shrinker = shrinker / 2;
     }
-    for (int i = 0; i < bits; i++)
+    for (mpz_class i = 0; i < bits; i = i + 1)
     {
         cout << "Q is " << Q << endl;
         Q = Q * Q;
