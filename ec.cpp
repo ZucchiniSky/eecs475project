@@ -149,6 +149,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     }
     for (int i = 0; i < bits; i++)
     {
+        cout << "at bit " << i << "in power" << endl;
         Q = Q * Q;
         if (bitrep.at(bits - 1 - i) == 1)
         {
@@ -184,21 +185,29 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
+    cout << "decompressing " << compressedPoint << endl;
     Zp x;
     x.setValue(compressedPoint >> 2);
+    cout << "x is " << x.getValue() << endl;
     Zp identity(0);
     mpz_class modbit = compressedPoint % 2;
+    cout << "modbit is " << modbit << endl;
     Zp z;
     z.setValue((x * x * x).getValue() + A * x.getValue() + B);
+    cout << "z is " << z.getValue() << endl;
     Zp y = 0;
     Zp quadRes1 = power(z, (PRIME + 1) / 4);
+    cout << "quadres1 is " << quadRes1.getValue();
     Zp quadRes2 = identity - quadRes1;
+    cout << "quadres2 is " << quadRes2.getValue();
     if (quadRes1.getValue() % 2 == modbit)
     {
         y = quadRes1;
+        cout << "chose 1" << endl;
     } else if (quadRes2.getValue() % 2 == modbit)
     {
         y = quadRes2;
+        cout << "chose 2" << endl;
     } else
     {
         cout << "point decompression error...neither satisfy modbit!" << endl;
