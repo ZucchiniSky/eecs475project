@@ -94,7 +94,6 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 	//Find the sum of p+p+...+p (vtimes)
-    cout << "repeat sum with " << p << " and v = " << v << endl;
     if (v == 0)
     {
         // this is p^0, which is the identity
@@ -108,7 +107,6 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         mod = mod * 2;
         bits++;
     }
-    cout << "v is " << bits << " long" << endl;
     mpz_class shrinker = v;
     vector<mpz_class> bitrep;
     for (int i = 0; i < bits; i++)
@@ -118,17 +116,12 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     }
     for (int i = 0; i < bits; i++)
     {
-        cout << "at bit " << i << endl;
         Q = Q + Q;
-        cout << "finished 2 * Q" << endl;
         if (bitrep.at(bits - 1 - i) == 1)
         {
-            cout << "adding p" << endl;
             Q = Q + p;
-            cout << "finished adding p" << endl;
         }
     }
-    cout << "finished repeat sum with Q = " << Q << endl;
     return Q;
 }
 
@@ -247,7 +240,6 @@ mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 
 int main(void){
 	srand(time(0));
-	cout<<"STUFF"<<endl;
 
 	ECsystem ec;
 	mpz_class incrementVal;	

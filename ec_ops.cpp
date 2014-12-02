@@ -66,8 +66,6 @@ ostream& operator << (ostream& output, const ECpoint& a){
 //================= Methods for ECsystem =================
 
 pair <ECpoint, mpz_class> ECsystem::generateKeys(){
-	Zp test = power(Zp(3), 5);
-	cout << "test: " << test << endl;
 	//Generate the private key and public key for the user to whom message is sent
 	//Returns only the "P" value of public key and "a" value of private key, 
 	//as other parameters are globally defined
