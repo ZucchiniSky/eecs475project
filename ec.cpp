@@ -33,6 +33,11 @@ Zp Zp::inverse() const{
         parallel_assign(old_s, s, quotient);
         parallel_assign(old_t, t, quotient);
     }
+    old_s = old_s % PRIME;
+    if (old_s < 0)
+    {
+        old_s = old_s + PRIME;
+    }
     cout << "inverse of " << value << " is " << old_s << endl;
     mpz_class old_s_squared = value * old_s;
     cout << value <<  " * inverse = " << endl << old_s_squared << " mod p = " << endl << (old_s_squared % PRIME) << endl;
