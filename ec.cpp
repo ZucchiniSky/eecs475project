@@ -120,23 +120,38 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 
 Zp ECsystem::power(Zp val, mpz_class pow) {
 	//Find the sum of val*val+...+val (pow times)
-    cout << "1" << endl;
     if (pow == 0)
     {
         return Zp(1);
     }
-    cout << "2" << endl;
     mpz_class Q(1);
+    mpz_class value = val.getValue();
     mpz_class zero(0);
     mpz_class mod(1);
-    cout << "3" << endl;
+    mpz_class bits(0);
     while (mod <= pow)
     {
     	mod = mod * 2;
+        bits = bits + 1;
     }
-    mod = mod / 2;
+    mpz_class shrinker = pow;
+    mpz_class bitrep[bits];
+    for (int i = 0; i < bits; i++)
+    {
+        bitrep[bits - 1 - i] = shrinker % 2;
+        shrinker = shrinker / 2;
+    }
+    for (int i = 0; i < bits; i++)
+    {
+        cout << "Q is " << Q << endl;
+        Q = Q * Q;
+        if (bitrep[i] == 1)
+        {
+            cout << "yes" << endl;
+            Q = Q * value;
+        }
+    }/*
     cout << "mod is " << mod << endl;
-    mpz_class value = val.getValue();
     for (; mod > 1; mod = mod / 2)
     {
         cout << "Q is " << Q << endl;
@@ -149,7 +164,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
             cout << "yes" << endl;
             Q = Q * value;
     	}
-    }
+    }*/
     cout << "Q is " << Q << endl;
     Zp ans;
     ans.setValue(Q);
