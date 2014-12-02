@@ -82,6 +82,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         //xR = (delta * delta) + two * x;
     } else {
         // case three (identity element)
+        cout << "identity element" << endl;
         return ECpoint(true);
     }
     //yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
