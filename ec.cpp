@@ -131,8 +131,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    mpz_class Q(1);
-    mpz_class value = val.getValue();
+    Zp Q(1);
     mpz_class mod(1);
     int bits = 0;
     while (mod <= pow)
@@ -152,9 +151,8 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
         Q = Q * Q;
         if (bitrep.at(bits - 1 - i) == 1)
         {
-            Q = Q * value;
+            Q = Q * val;
         }
-        Q = Q % PRIME;
     }
     Zp ans;
     ans.setValue(Q);
