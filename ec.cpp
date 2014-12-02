@@ -196,6 +196,8 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 	//  Do not generate a random key. Use the private key that is passed from the main function
     ECpoint Q = G * privateKey;
     ECpoint R = publicKey * privateKey;
+    cout << "Q: " << Q << endl;
+    cout << "R: " << R << endl;
     return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
 
