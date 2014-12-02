@@ -142,34 +142,16 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
         bitrep.push_back(shrinker % 2);
         shrinker = shrinker / 2;
     }
-    int index = 0;
+    int index = bits - 1;
     for (mpz_class i = 0; i < bits; i = i + 1)
     {
-        cout << "Q is " << Q << endl;
         Q = Q * Q;
         if (bitrep.at(index) == 1)
         {
-            cout << "yes" << endl;
             Q = Q * value;
         }
-        index++;
+        index--;
     }
-    /*
-    cout << "mod is " << mod << endl;
-    for (; mod > 1; mod = mod / 2)
-    {
-        cout << "Q is " << Q << endl;
-        cout << "mod is " << mod << endl;
-    	Q = Q * Q;
-        mpz_class result = pow & mod;
-        cout << "modulus is " << result << endl;
-    	if (!(pow & mod == zero))
-    	{
-            cout << "yes" << endl;
-            Q = Q * value;
-    	}
-    }*/
-    cout << "Q is " << Q << endl;
     Zp ans;
     ans.setValue(Q);
     return ans;
