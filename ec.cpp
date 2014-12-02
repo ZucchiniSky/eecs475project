@@ -148,6 +148,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
             Q = Q * value;
     	}
     }
+    cout << "Q is " << Q << endl;
     Zp ans;
     ans.setValue(Q);
     return ans;
