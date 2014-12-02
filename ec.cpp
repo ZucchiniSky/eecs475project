@@ -202,8 +202,9 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 
 mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 	// Implement EC Decryption
-	cout << "decompress: " <<pointDecompress(ciphertext.first) << endl;
+	
     ECpoint R = pointDecompress(ciphertext.first) * privateKey;
+    cout << "R: " << R << endl;
     return ciphertext.second ^ pointCompress(R);
 }
 
