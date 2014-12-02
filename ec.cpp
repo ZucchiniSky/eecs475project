@@ -224,6 +224,7 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
     Zp z;
     z.setValue((Q.x * Q.x * Q.x).getValue() + A * Q.x.getValue() + B);
     cout << "Q.z is " << z.getValue() << endl;
+    cout << "Q.y^2 is " << (Q.y * Q.y).getValue() << endl;
     cout << "R: " << R << endl;
     return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
