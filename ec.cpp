@@ -187,6 +187,7 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     {
         cout << "point decompression error...neither satisfy modbit!" << endl;
     }
+    cout << "x: " << x << "y: " << y;
     return ECpoint(x, y);
 }
 
