@@ -200,11 +200,11 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     cout << "quadres1 is " << quadRes1.getValue();
     Zp quadRes2 = identity - quadRes1;
     cout << "quadres2 is " << quadRes2.getValue();
-    if (quadRes1.getValue() % 2 != modbit)
+    if (quadRes1.getValue() % 2 == modbit)
     {
         y = quadRes1;
         cout << "chose 1" << endl;
-    } else if (quadRes2.getValue() % 2 != modbit)
+    } else if (quadRes2.getValue() % 2 == modbit)
     {
         y = quadRes2;
         cout << "chose 2" << endl;
@@ -222,6 +222,9 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
     ECpoint Q = G * privateKey;
     ECpoint R = publicKey * privateKey;
     cout << "Q: " << Q << endl;
+    Zp z;
+    z.setValue((Q.x * Q.x * Q.x).getValue() + A * Q.x.getValue() + B);
+    cout << "Q.z is " << z.getValue() << endl;
     cout << "R: " << R << endl;
     return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
