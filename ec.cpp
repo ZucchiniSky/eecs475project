@@ -187,7 +187,6 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     {
         cout << "point decompression error...neither satisfy modbit!" << endl;
     }
-    cout << "x: " << x << "y: " << y;
     return ECpoint(x, y);
 }
 
@@ -203,6 +202,7 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 
 mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 	// Implement EC Decryption
+	cout << "decompress: " <<pointDecompress(ciphertext.first) << endl;
     ECpoint R = pointDecompress(ciphertext.first) * privateKey;
     return ciphertext.second ^ pointCompress(R);
 }
