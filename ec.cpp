@@ -123,7 +123,6 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    mpz_class Q(val.getValue());
     mpz_class mod(1);
     while (mod <= pow)
     {
@@ -132,6 +131,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     mod = mod / 2;
     cout << "mod is " << mod << endl;
     mpz_class value = val.getValue();
+    mpz_class Q = value;
     for (; mod > 0; mod = mod / 2)
     {
         cout << "Q is " << Q << endl;
