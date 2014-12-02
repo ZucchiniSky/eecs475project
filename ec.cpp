@@ -177,8 +177,7 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
-    Zp test = power(Zp(7), 4);
-	cout << "test: " << test << endl;
+    
     
     Zp x;
     x.setValue(compressedPoint >> 2);
@@ -237,7 +236,10 @@ mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 int main(void){
 	srand(time(0));
 	cout<<"STUFF"<<endl;
+
 	ECsystem ec;
+	Zp test = power(Zp(7), 4);
+	cout << "test: " << test << endl;
 	mpz_class incrementVal;	
 	pair <ECpoint, mpz_class> keys = ec.generateKeys();
 	
