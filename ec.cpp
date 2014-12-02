@@ -191,7 +191,12 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     cout << "modbit is " << modbit << endl;
     Zp z;
     mpz_class x_value = x.getValue();
-    z.setValue(x_value ^ 3 + A * x_value + B);
+    mpz_class z_value = x_value ^ 3 + A * x_value + B;
+    while (z_value < 0)
+    {
+        z_value = z_value + PRIME;
+    }
+    z.setValue(z_value);
     cout << "z is " << z.getValue() << endl;
     Zp y = 0;
     Zp quadRes1 = power(z, (PRIME + 1) / 4);
