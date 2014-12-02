@@ -131,7 +131,6 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    Zp Q(1);
     mpz_class mod(1);
     int bits = 0;
     while (mod <= pow)
@@ -146,16 +145,19 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
         bitrep.push_back(shrinker % 2);
         shrinker = shrinker / 2;
     }
+    mpz_class Q = 1;
+    mpz_class value = val.getValue();
     for (int i = 0; i < bits; i++)
     {
-        cout << "at bit " << i << endl;
-        Q = Q * Q;
+        Q = (Q * Q) % PRIME;
         if (bitrep.at(bits - 1 - i) == 1)
         {
-            Q = Q * val;
+            Q = (Q * value) % PRIME;
         }
     }
-    return Q;
+    Zp ans;
+    ans.setValue(Q);
+    return ans;
 }
 
 
@@ -190,17 +192,7 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     mpz_class modbit = compressedPoint % 2;
     cout << "modbit is " << modbit << endl;
     Zp z;
-    mpz_class aMod = A;
-    if (aMod < 0)
-    {
-        aMod = aMod + PRIME;
-    }
-    mpz_class bMod = B;
-    if (bMod < 0)
-    {
-        bMod = bMod + PRIME;
-    }
-    z.setValue((x * x * x).getValue() + aMod * x.getValue() + bMod);
+    z.setValue((x * x * x).getValue() + A * x.getValue() + B);
     cout << "z is " << z.getValue() << endl;
     Zp y = 0;
     Zp quadRes1 = power(z, (PRIME + 1) / 4);
