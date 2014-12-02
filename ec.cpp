@@ -148,6 +148,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     }
     for (int i = 0; i < bits; i++)
     {
+        cout << "at bit " << i << endl;
         Q = Q * Q;
         if (bitrep.at(bits - 1 - i) == 1)
         {
