@@ -123,7 +123,7 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    mpz_class Q(0);
+    mpz_class Q(1);
     mpz_class mod(1);
     while (mod <= pow)
     {
