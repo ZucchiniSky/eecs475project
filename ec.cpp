@@ -98,12 +98,13 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECpoint Q(true);
+    ECpoint Q(p.x, p.y);
     mpz_class val(1);
     while (val <= v)
     {
     	val = val * 2;
     }
+    val = val / 2;
     for (; val > 0; val = val / 2)
     {
     	Q = Q + Q;
@@ -122,12 +123,13 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         return Zp(1);
     }
-    mpz_class Q(1);
+    mpz_class Q(val.getValue());
     mpz_class mod(1);
     while (mod <= pow)
     {
     	mod = mod * 2;
     }
+    mod = mod / 2;
     cout << "mod is " << mod << endl;
     mpz_class value = val.getValue();
     for (; mod > 0; mod = mod / 2)
