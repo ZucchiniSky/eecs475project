@@ -107,8 +107,8 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     {
         mod = mod * 2;
         bits++;
-        cout << "v is " << bits << " long" << endl;
     }
+    cout << "v is " << bits << " long" << endl;
     mpz_class shrinker = v;
     vector<mpz_class> bitrep;
     for (int i = 0; i < bits; i++)
@@ -120,9 +120,12 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     {
         cout << "at bit " << i << endl;
         Q = Q + Q;
+        cout << "finished 2 * Q" << endl;
         if (bitrep.at(bits - 1 - i) == 1)
         {
+            cout << "adding p" << endl;
             Q = Q + p;
+            cout << "finished adding p" << endl;
         }
     }
     cout << "finished repeat sum with Q = " << Q << endl;
