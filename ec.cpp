@@ -86,9 +86,8 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
         cout << "identity element" << endl;
         return ECpoint(true);
     }
-    //yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
+    yR.setValue(delta.getValue() * (x.getValue() - xR.getValue()) - y.getValue());
     //yR = delta * (x - xR) - y;
-    yR.setValue(delta.getValue() * (x - xR).getValue() - y.getValue());
     return ECpoint(xR, yR);
 }
 
