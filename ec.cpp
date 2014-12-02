@@ -38,9 +38,6 @@ Zp Zp::inverse() const{
     {
         old_s = old_s + PRIME;
     }
-    cout << "inverse of " << value << " is " << old_s << endl;
-    mpz_class old_s_squared = value * old_s;
-    cout << value <<  " * inverse = " << endl << old_s_squared << " mod p = " << endl << (old_s_squared % PRIME) << endl;
     Zp inv;
     inv.setValue(old_s);
     return inv;
@@ -63,20 +60,20 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     }
     Zp two(2), three(3);
     Zp xR, yR, delta;
-    if (!(*this == a) && !(x == a.x))
+    if (!(x == a.x) && !(y == a.y))
     {
         // case one
         //delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
         //xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
-        delta = (a.y-y) * (a.x-x).inverse();
-        xR = (delta * delta) - x - a.x;
-    } else if ((*this == a) && !(two * y == 0))
+        delta = (a.y-y) * ((a.x-x).inverse());
+        xR = delta * delta - x - a.x;
+    } else if (x == a.x && y == a.y && !(two * y == 0))
     {
         // case two
         //delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
         //xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
-        delta = (three * x * x + A) * (two * y).inverse();
-        xR = (delta * delta) + two * x;
+        delta = (three * x * x + A) * ((two * y).inverse());
+        xR = delta * delta - two * x;
     } else {
         // case three (identity element)
         cout << "identity element" << endl;
