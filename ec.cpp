@@ -190,13 +190,14 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
     mpz_class modbit = compressedPoint % 2;
     cout << "modbit is " << modbit << endl;
     Zp z;
-    z.setValue((x * x * x).getValue() + A * x.getValue() + B);
+    mpz_class x_value = x.getValue();
+    z.setValue(x_value ^ 3 + A * x_value + B);
     cout << "z is " << z.getValue() << endl;
     Zp y = 0;
     Zp quadRes1 = power(z, (PRIME + 1) / 4);
-    cout << "quadres1 is " << quadRes1.getValue();
+    cout << "quadres1 is " << quadRes1.getValue() << endl;
     Zp quadRes2 = identity - quadRes1;
-    cout << "quadres2 is " << quadRes2.getValue();
+    cout << "quadres2 is " << quadRes2.getValue() << endl;
     if (quadRes1.getValue() % 2 == modbit)
     {
         y = quadRes1;
