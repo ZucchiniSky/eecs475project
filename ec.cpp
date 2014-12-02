@@ -35,8 +35,7 @@ Zp Zp::inverse() const{
     }
     cout << "inverse of " << value << " is " << old_s << endl;
     mpz_class old_s_squared = old_s * old_s;
-    cout << old_s <<  " ^2 = " << old_s_squared << endl;
-    assert((old_s_squared % PRIME) == 1);
+    cout << old_s <<  " ^ 2 = " << old_s_squared << " mod p = " << old_s_squared % PRIME << endl;
     Zp inv;
     inv.setValue(old_s);
     return inv;
