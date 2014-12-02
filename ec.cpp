@@ -100,21 +100,27 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         return ECpoint(true);
     }
     ECpoint Q(p.x, p.y);
-    mpz_class val(1);
-    mpz_class zero(0);
-    while (val <= v)
+    mpz_class mod(1);
+    int bits = 0;
+    while (mod <= v)
     {
-    	val = val * 2;
+        mod = mod * 2;
+        bits++;
     }
-    val = val / 2;
-    for (; val > 1; val = val / 2)
+    mpz_class shrinker = v;
+    vector<mpz_class> bitrep;
+    for (int i = 0; i < bits; i++)
     {
-    	Q = Q + Q;
-        mpz_class result = v % val;
-    	if (!(v % val == zero))
-    	{
+        bitrep.push_back(shrinker % 2);
+        shrinker = shrinker / 2;
+    }
+    for (int i = 0; i < bits; i++)
+    {
+        Q = Q + Q;
+        if (bitrep.at(bits - 1 - i) == 1)
+        {
             Q = Q + p;
-    	}
+        }
     }
     return Q;
 }
@@ -127,30 +133,27 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     }
     mpz_class Q(1);
     mpz_class value = val.getValue();
-    mpz_class zero(0);
     mpz_class mod(1);
-    mpz_class bits(0);
+    int bits = 0;
     while (mod <= pow)
     {
         mod = mod * 2;
-        bits = bits + 1;
+        bits++;
     }
     mpz_class shrinker = pow;
     vector<mpz_class> bitrep;
-    for (mpz_class i = 0; i < bits; i = i + 1)
+    for (int i = 0; i < bits; i++)
     {
         bitrep.push_back(shrinker % 2);
         shrinker = shrinker / 2;
     }
-    int index = bits - 1;
-    for (mpz_class i = 0; i < bits; i = i + 1)
+    for (int i = 0; i < bits; i++)
     {
         Q = Q * Q;
-        if (bitrep.at(index) == 1)
+        if (bitrep.at(bits - 1 - i) == 1)
         {
             Q = Q * value;
         }
-        index--;
     }
     Zp ans;
     ans.setValue(Q);
