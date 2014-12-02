@@ -110,10 +110,8 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     	Q = Q + Q;
     	if ((v % val) == 0)
     	{
-    	} else
-        {
             Q = Q + p;
-        }
+    	}
     }
     return Q;
 }
@@ -137,13 +135,12 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     {
         cout << "mod is " << mod << endl;
     	Q = Q * Q;
+        cout << "modulus is " << value % mod << endl;
     	if ((value % mod) == 0)
     	{
-    	} else
-        {
             cout << "yes" << endl;
             Q = Q * value;
-        }
+    	}
     }
     Zp ans;
     ans.setValue(Q);
