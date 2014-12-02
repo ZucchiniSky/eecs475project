@@ -94,18 +94,20 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
 
 ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
 	//Find the sum of p+p+...+p (vtimes)
+    cout << "repeat sum with " << p << " and v = " << v << endl;
     if (v == 0)
     {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECpoint Q(p.x, p.y);
+    ECpoint Q(true);
     mpz_class mod(1);
     int bits = 0;
     while (mod <= v)
     {
         mod = mod * 2;
         bits++;
+        cout << "v is " << bits << " long" << endl;
     }
     mpz_class shrinker = v;
     vector<mpz_class> bitrep;
@@ -116,12 +118,14 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
     }
     for (int i = 0; i < bits; i++)
     {
+        cout << "at bit " << i << endl;
         Q = Q + Q;
         if (bitrep.at(bits - 1 - i) == 1)
         {
             Q = Q + p;
         }
     }
+    cout << "finished repeat sum with Q = " << Q << endl;
     return Q;
 }
 
