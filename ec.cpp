@@ -4,6 +4,7 @@
 #include <gmpxx.h>
 #include <utility>
 #include "ec_ops.h"
+#include <vector>
 using namespace std;
 void parallel_assign(mpz_class &a, mpz_class &b, mpz_class quotient);
 
@@ -128,29 +129,24 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     mpz_class value = val.getValue();
     mpz_class zero(0);
     mpz_class mod(1);
-    mpz_class bits(0);
-    while (mod <= pow)
-    {
-    	mod = mod * 2;
-        bits = bits + 1;
-    }
     mpz_class shrinker = pow;
-    mpz_class bitrep[bits];
+    vector<mpz_class> bitrep;
     for (int i = 0; i < bits; i++)
     {
-        bitrep[bits - 1 - i] = shrinker % 2;
+        bitrep.push_back(shrinker % 2);
         shrinker = shrinker / 2;
     }
     for (int i = 0; i < bits; i++)
     {
         cout << "Q is " << Q << endl;
         Q = Q * Q;
-        if (bitrep[i] == 1)
+        if (bitrep.at(i) == 1)
         {
             cout << "yes" << endl;
             Q = Q * value;
         }
-    }/*
+    }
+    /*
     cout << "mod is " << mod << endl;
     for (; mod > 1; mod = mod / 2)
     {
