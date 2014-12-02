@@ -63,23 +63,17 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     if (!(x == a.x) && !(y == a.y))
     {
         // case one
-        //delta.setValue((a.y.getValue()-y.getValue())/(a.x.getValue()-x.getValue()));
-        //xR.setValue((delta.getValue() * delta.getValue()) - x.getValue() - a.x.getValue());
         delta = (a.y-y) * ((a.x-x).inverse());
         xR = delta * delta - x - a.x;
     } else if (x == a.x && y == a.y && !(two * y == 0))
     {
         // case two
-        //delta.setValue((three.getValue() * x.getValue() * x.getValue() + A)/(two.getValue() * y.getValue()));
-        //xR.setValue((delta.getValue() * delta.getValue()) + two.getValue() * x.getValue());
         delta = (three * x * x + A) * ((two * y).inverse());
         xR = delta * delta - two * x;
     } else {
         // case three (identity element)
-        cout << "identity element" << endl;
         return ECpoint(true);
     }
-    //yR.setValue(delta.getValue() * ((x.getValue() - xR.getValue()) % PRIME) - y.getValue());
     yR = delta * (x - xR) - y;
     return ECpoint(xR, yR);
 }
@@ -148,9 +142,6 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
         }
     }
     return Q;
-    /*Zp ans;
-    ans.setValue(val.getValue() ^ pow);
-    return ans;*/
 }
 
 
@@ -177,36 +168,29 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
-    cout << "decompressing " << compressedPoint << endl;
     Zp x;
     x.setValue(compressedPoint / 2);
-    cout << "x is " << x.getValue() << endl;
     Zp identity(0);
     mpz_class modbit = compressedPoint % 2;
-    cout << "modbit is " << modbit << endl;
     Zp z;
     z.setValue((x * x * x).getValue() + A * x.getValue() + B);
     if (z.getValue() < 0)
     {
         z.setValue(z.getValue() + PRIME);
     }
-    cout << "z is " << z.getValue() << endl;
     Zp y = 0;
     Zp quadRes1 = power(z, (PRIME + 1) / 4);
-    cout << "quadres1 is " << quadRes1.getValue() << endl;
     Zp quadRes2 = identity - quadRes1;
-    cout << "quadres2 is " << quadRes2.getValue() << endl;
     if (quadRes1.getValue() % 2 == modbit)
     {
         y = quadRes1;
-        cout << "chose 1" << endl;
     } else if (quadRes2.getValue() % 2 == modbit)
     {
         y = quadRes2;
-        cout << "chose 2" << endl;
     } else
     {
-        cout << "point decompression error...neither satisfy modbit!" << endl;
+        cout << "Point decompression error" << flush;
+        abort();
     }
     return ECpoint(x, y);
 }
@@ -217,25 +201,13 @@ pair<mpz_class, mpz_class> ECsystem::encrypt(ECpoint publicKey, mpz_class privat
 	//  Do not generate a random key. Use the private key that is passed from the main function
     ECpoint Q = G * privateKey;
     ECpoint R = publicKey * privateKey;
-    cout << "Q: " << Q << endl;
-    Zp z;
-    z.setValue((Q.x * Q.x * Q.x).getValue() + A * Q.x.getValue() + B);
-    if (z.getValue() < 0)
-    {
-        z.setValue(z.getValue() + PRIME);
-    }
-    cout << "Q.z is " << z.getValue() << endl;
-    cout << "Q.y^2 is " << (Q.y * Q.y).getValue() << endl;
-    cout << "R: " << R << endl;
     return make_pair<mpz_class, mpz_class>(pointCompress(Q), plaintext ^ pointCompress(R));
 }
 
 
 mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
 	// Implement EC Decryption
-	
     ECpoint R = pointDecompress(ciphertext.first) * privateKey;
-    cout << "R: " << R << endl;
     return ciphertext.second ^ pointCompress(R);
 }
 
