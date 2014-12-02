@@ -20,15 +20,8 @@ Zp Zp::inverse() const{
     mpz_class s = 0;
     mpz_class t = 1;
     
-    mpz_class r = value;
-    mpz_class old_r = PRIME;
-    if(PRIME > value)
-    {
-    	r = PRIME;
-    	old_r = value;
-    }
-   /* mpz_class r = 11;
-   mpz_class old_r = 3;*/
+    mpz_class r = PRIME;
+    mpz_class old_r = value;
     mpz_class old_s = 1;
     mpz_class old_t = 0;
     
@@ -37,14 +30,13 @@ Zp Zp::inverse() const{
     {
         quotient = old_r / r;
         parallel_assign(old_r, r, quotient);
-        //cout << "old_r: " << old_r << " " << "r: " << r << "\n";
         parallel_assign(old_s, s, quotient);
-        //cout << "old_s: " << old_s << " " << "s: "<<s  << "\n";
         parallel_assign(old_t, t, quotient);
-        //cout << "old_t: " << old_t << " " << "t: "<<t <<  "\n";
     }
-    //cout << "inverse results: " << endl;
-    //cout << old_s << " " << value * old_s << endl;
+    cout << "inverse of " << value << " is " << old_s << endl;
+    mpz_class old_s_squared = old_s * old_s;
+    cout << old_s <<  " ^2 = " << old_s_squared << endl;
+    assert((old_s_squared % PRIME) == 1);
     Zp inv;
     inv.setValue(old_s);
     return inv;
