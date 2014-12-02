@@ -34,8 +34,8 @@ Zp Zp::inverse() const{
         parallel_assign(old_t, t, quotient);
     }
     cout << "inverse of " << value << " is " << old_s << endl;
-    mpz_class old_s_squared = old_s * old_s;
-    cout << old_s <<  " ^ 2 = " << old_s_squared << " mod p = " << old_s_squared % PRIME << endl;
+    mpz_class old_s_squared = value * old_s;
+    cout << value <<  " * inverse = " << endl << old_s_squared << " mod p = " << endl << (old_s_squared % PRIME) << endl;
     Zp inv;
     inv.setValue(old_s);
     return inv;
