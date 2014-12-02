@@ -139,11 +139,11 @@ Zp ECsystem::power(Zp val, mpz_class pow) {
     	Q = Q * Q;
         mpz_class result = pow % mod;
         cout << "modulus is " << result << flush;
-    	if (!(result == 0))
+    	/*if (!(result == 0))
     	{
             cout << "yes" << endl;
             Q = Q * value;
-    	}
+    	}*/
     }
     Zp ans;
     ans.setValue(Q);
