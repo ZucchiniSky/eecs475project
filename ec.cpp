@@ -238,7 +238,7 @@ int main(void){
 	cout<<"STUFF"<<endl;
 
 	ECsystem ec;
-	Zp test = ec.power(Zp(7), 4);
+	Zp test = power(Zp(7), 4);
 	cout << "test: " << test << endl;
 	mpz_class incrementVal;	
 	pair <ECpoint, mpz_class> keys = ec.generateKeys();
