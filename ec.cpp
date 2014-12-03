@@ -222,7 +222,7 @@ mpz_class ECsystem::decrypt(pair<mpz_class, mpz_class> ciphertext){
  *       evaluate the correctness of your program.
  */
 
-
+/*
 int main(void){
 	srand(time(0));
 
@@ -252,5 +252,5 @@ int main(void){
 	return 1;
 
 }
-
+*/
 
