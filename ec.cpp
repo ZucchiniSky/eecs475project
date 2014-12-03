@@ -86,7 +86,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECpoint Q(true);
+    decompress Q(true);
     mpz_class mod(1);
     int bits = 0;
     while (mod <= v)
@@ -169,8 +169,8 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
 	
-	ECPoint test1(true);
-	ECPoint test2(true);
+	ECPoint test1 = ECPoint(true);
+	ECPoint test2 = ECPoint(true);
 	ECPoint test3 = test1+test2;
 	cout << "test3: " << test3 << endl;
 	
