@@ -168,12 +168,6 @@ mpz_class ECsystem::pointCompress(ECpoint e) {
 
 ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	//Implement the delta function for decompressing the compressed point
-	
-	ECpoint test1(23,32);
-	ECpoint test2(true);
-	ECpoint test3 = test2 +test1;
-	cout << "test3: " << test3 << endl;
-	
     Zp x;
     x.setValue(compressedPoint / 2);
     Zp identity(0);
