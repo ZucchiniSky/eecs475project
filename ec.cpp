@@ -171,7 +171,7 @@ ECpoint ECsystem::pointDecompress(mpz_class compressedPoint){
 	
 	ECpoint test1(23,32);
 	ECpoint test2(true);
-	ECpoint test3 = test1+test2;
+	ECpoint test3 = test2 +test1;
 	cout << "test3: " << test3 << endl;
 	
     Zp x;
