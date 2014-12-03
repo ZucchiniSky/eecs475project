@@ -86,7 +86,7 @@ ECpoint ECpoint::repeatSum(ECpoint p, mpz_class v) const {
         // this is p^0, which is the identity
         return ECpoint(true);
     }
-    ECPoint Q(true);
+    ECpoint Q(true);
     mpz_class mod(1);
     int bits = 0;
     while (mod <= v)
