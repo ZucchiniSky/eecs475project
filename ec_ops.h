@@ -34,7 +34,7 @@ const mpz_class XA(XA_STR); //private key of receiver
 const mpz_class XB(XB_STR); //private key of sender
 */
 const mpz_class PRIME(11);
-const mpz_class ORDER(ORDER_STR);
+const mpz_class ORDER(5);
 const mpz_class A(1);
 const mpz_class B(6);
 const mpz_class GX(2);
