@@ -22,7 +22,7 @@ using namespace std;
 #define XB_STR      "57186659798102937103987098738741922938473470129777292030047589723837472987319" //private key of sender
 
 
-/*
+
 const mpz_class PRIME(PRIME_STR);
 const mpz_class ORDER(ORDER_STR);
 const mpz_class A(A_STR);
@@ -32,7 +32,7 @@ const mpz_class GY(GY_STR, 16);
 const mpz_class MESSAGE(MESSAGE_STR);
 const mpz_class XA(XA_STR); //private key of receiver
 const mpz_class XB(XB_STR); //private key of sender
-*/
+/*
 const mpz_class PRIME(11);
 const mpz_class ORDER(5);
 const mpz_class A(1);
@@ -41,7 +41,7 @@ const mpz_class GX(2);
 const mpz_class GY(7);
 const mpz_class MESSAGE("7");
 const mpz_class XA(2); //private key of receiver
-const mpz_class XB(3); //private key of sender
+const mpz_class XB(3); //private key of sender*/
 /*
  * class Zp: An element in GF(p)
  */
