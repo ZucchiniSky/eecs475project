@@ -39,7 +39,7 @@ const mpz_class A(1);
 const mpz_class B(6);
 const mpz_class GX(2);
 const mpz_class GY(7);
-const mpz_class MESSAGE(MESSAGE_STR);
+const mpz_class MESSAGE("189018");
 const mpz_class XA(2); //private key of receiver
 const mpz_class XB(3); //private key of sender
 /*
