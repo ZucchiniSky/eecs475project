@@ -60,7 +60,7 @@ ECpoint ECpoint::operator + (const ECpoint &a) const {
     }
     Zp two(2), three(3);
     Zp xR, yR, delta;
-    if (!(x == a.x) && !(y == a.y))
+    if (!(x == a.x))// && !(y == a.y))
     {
         // case one
         delta = (a.y-y) * ((a.x-x).inverse());
